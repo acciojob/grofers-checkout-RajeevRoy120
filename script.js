@@ -5,7 +5,7 @@ document.body.appendChild(getSumBtn);
 
 const getSum = () => {
     // Select all elements with class "price"
-    const prices = document.querySelectorAll(".price");
+    const prices = document.querySelectorAll(".prices");
     let total = 0;
 
     // Loop through each price element and sum values
