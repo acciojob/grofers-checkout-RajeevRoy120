@@ -1,50 +1,34 @@
 // Create a button dynamically
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
+window.onload = function() {
+    function calculateTotal() {
+        var prices = document.querySelectorAll('.price'); // Select all price elements
+        var total = 0;
 
-const getSum = () => {
-    // Select all elements with class "price"
-    const prices = document.querySelectorAll(".prices");
-    let total = 0;
+        // Loop through price elements and sum them up
+        for (var i = 0; i < prices.length; i++) {
+            total += parseFloat(prices[i].innerText); // Convert text to number and add
+        }
 
-    // Loop through each price element and sum values
-    prices.forEach(price => {
-        total += parseFloat(price.textContent); // Convert text to number
-    });
+        var table = document.querySelector('table'); // Get the table
+        var existingTotalRow = document.getElementById("totalRow"); // Check if total row exists
 
-    // Check if the total row already exists, if yes, remove it
-    const existingTotalRow = document.getElementById("totalRow");
-    if (existingTotalRow) {
-        existingTotalRow.remove();
+        // If a total row already exists, remove it before adding a new one
+        if (existingTotalRow) {
+            existingTotalRow.remove();
+        }
+
+        // Create new row for total price
+        var row = table.insertRow(-1); // Insert at the end
+        row.id = "totalRow"; // Assign ID for easy reference
+
+        var cell = row.insertCell(0); // Insert new cell
+        cell.colSpan = "2"; // Make cell span two columns
+        cell.style.fontWeight = "bold"; // Make text bold
+        cell.style.textAlign = "center"; // Center the text
+        cell.innerText = 'Total Price: ₹' + total; // Set total price in the cell
     }
 
-    // Create a new row for the total price
-    const totalRow = document.createElement("tr");
-    totalRow.id = "totalRow"; // Give an ID to avoid duplicate rows
-
-    const totalLabel = document.createElement("td");
-    const totalValue = document.createElement("td");
-
-    // Set text content for total row
-    totalLabel.textContent = "Total";
-    totalValue.textContent = `Rs ${total.toFixed(2)}`;
-
-    // Apply styles
-    totalLabel.style.fontWeight = "bold";
-    totalValue.style.fontWeight = "bold";
-
-    // Append cells to row
-    totalRow.appendChild(totalLabel);
-    totalRow.appendChild(totalValue);
-
-    // Append row to the table
-    document.querySelector("table").appendChild(totalRow);
+    calculateTotal(); // Call function on page load
 };
-
-// Add event listener to the button
-getSumBtn.addEventListener("click", getSum);
-
-
 
 
