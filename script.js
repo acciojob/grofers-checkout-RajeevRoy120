@@ -1,4 +1,5 @@
 // Create a button dynamically
+
 window.onload = function() {
     function calculateTotal() {
         var prices = document.querySelectorAll('.price'); // Select all price elements
@@ -30,5 +31,3 @@ window.onload = function() {
 
     calculateTotal(); // Call function on page load
 };
-
-
